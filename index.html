@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>우리의 모바일 청첩장</title>
-    <link rel="stylesheet" href="css/style.css"> <!-- CSS 파일 연결 -->
-    <script defer src="js/script.js"></script> <!-- JavaScript 파일 연결 -->
+    <title>수진 & 준호 모바일 청첩장</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="js/script.js"></script>
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_API_KEY"></script> <!-- 카카오맵 API -->
 </head>
 <body>
 
     <!-- 1. Main 정보 섹션 -->
-    <section id="main" class="section">
-        <h1>수진 & 준호의 결혼식</h1>
-        <p>2025년 9월 7일 (토) 오후 2시</p>
-        <p>서울 ○○호텔 3층 ○○홀</p>
+    <section id="main" class="section main-section">
+        <div class="overlay">
+            <h1>수진 & 준호</h1>
+            <p class="wedding-date">2025년 9월 7일 (토) 오후 2시</p>
+            <p class="wedding-place">서울 ○○호텔 3층 ○○홀</p>
+        </div>
     </section>
 
     <!-- 2. 사진첩 섹션 -->
@@ -22,26 +25,27 @@
         <div class="gallery-container">
             <img src="images/photo1.jpg" alt="웨딩사진1">
             <img src="images/photo2.jpg" alt="웨딩사진2">
+            <img src="images/photo3.jpg" alt="웨딩사진3">
         </div>
     </section>
 
     <!-- 3. 초대글 섹션 -->
     <section id="invitation" class="section">
         <h2>초대의 글</h2>
-        <p>소중한 분들을 초대합니다. 함께해 주세요!</p>
+        <p class="invitation-text">소중한 순간을 함께 해주세요. 따뜻한 축복과 사랑을 기다립니다.</p>
     </section>
 
     <!-- 4. 오시는 길 (카카오맵 API) -->
     <section id="directions" class="section">
         <h2>오시는 길</h2>
-        <div id="map"></div> <!-- 카카오맵 표시 -->
+        <div id="map"></div>
     </section>
 
     <!-- 5. 연락처 & 계좌번호 -->
     <section id="contact" class="section">
         <h2>연락처 & 계좌번호</h2>
-        <p>신랑: 010-1234-5678</p>
-        <p>신부: 010-8765-4321</p>
+        <p><strong>신랑:</strong> 010-1234-5678</p>
+        <p><strong>신부:</strong> 010-8765-4321</p>
     </section>
 
     <!-- 하단 고정 메뉴 -->
