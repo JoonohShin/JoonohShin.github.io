@@ -3,49 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>우리의 청첩장</title>
+    <title>우리의 모바일 청첩장</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_KAKAO_API_KEY"></script>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
+        /* 전체 페이지 스타일 */
+        html {
+            scroll-behavior: smooth; /* 부드러운 스크롤 효과 */
+        }
+        /* 고정된 하단 네비게이션 바 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        .bottom-nav a {
+            text-align: center;
+            flex: 1;
+            padding: 10px;
+            font-weight: bold;
+            color: gray;
+        }
+        .bottom-nav a:hover {
+            color: black;
+        }
+        /* 각 섹션 스타일 */
+        section {
+            min-height: 100vh;
+            padding: 50px 20px;
+        }
+        #map {
+            width: 100%;
+            height: 300px;
         }
     </style>
 </head>
 <body class="bg-gray-100 text-center">
-    <div class="max-w-md mx-auto p-6 bg-white shadow-lg rounded-xl mt-10" data-aos="fade-up">
-        <h1 class="text-3xl font-bold text-gray-800">💍 우리의 결혼식 💍</h1>
-        <p class="mt-2 text-gray-600 text-lg">2025년 9월 7일 (토) 오후 2시</p>
-        <p class="text-gray-600 text-lg">서울 ○○호텔 3층</p>
-        
-        <div class="mt-6">
-            <img src="https://via.placeholder.com/300" alt="우리 사진" class="rounded-lg shadow-md">
+    
+    <!-- Main 정보 -->
+    <section id="main" class="bg-white" data-aos="fade-up">
+        <h1 class="text-3xl font-bold">💍 우리의 결혼식 💍</h1>
+        <p class="mt-2 text-lg">2025년 9월 7일 (토) 오후 2시</p>
+        <p class="text-md text-gray-600">서울 ○○호텔 3층</p>
+    </section>
+    
+    <!-- 사진첩 -->
+    <section id="gallery" class="bg-gray-200" data-aos="fade-up">
+        <h2 class="text-2xl font-bold">📸 사진첩</h2>
+        <div class="mt-4 grid grid-cols-2 gap-4">
+            <img src="https://via.placeholder.com/150" class="rounded-lg">
+            <img src="https://via.placeholder.com/150" class="rounded-lg">
         </div>
-        
-        <div class="mt-6">
-            <p class="text-gray-700 text-md">사랑하는 가족과 친구들을 우리의 특별한 날에 초대합니다.</p>
-        </div>
-        
-        <div class="mt-6">
-            <a href="https://maps.google.com" target="_blank" class="block bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">📍 장소 확인하기</a>
-        </div>
-        
-        <div class="mt-6">
-            <h2 class="text-xl font-semibold text-gray-800">💌 RSVP</h2>
-            <p class="text-gray-600 text-md">참석 여부를 알려주세요!</p>
-            <form class="mt-4">
-                <input type="text" placeholder="이름" class="w-full p-2 border border-gray-300 rounded-md mb-2">
-                <input type="email" placeholder="이메일" class="w-full p-2 border border-gray-300 rounded-md mb-2">
-                <button type="submit" class="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300">참석하기</button>
-            </form>
-        </div>
-        
-        <p class="mt-6 text-gray-500">많이 와주시면 감사하겠습니다! 💖</p>
+    </section>
+    
+    <!-- 초대글 -->
+    <section id="invitation" class="bg-white" data-aos="fade-up">
+        <h2 class="text-2xl font-bold">💌 초대의 글</h2>
+        <p class="mt-4 text-lg">우리의 소중한 날에 함께해 주세요.</p>
+    </section>
+    
+    <!-- 오시는 길 (카카오맵) -->
+    <section id="location" class="bg-gray-200" data-aos="fade-up">
+        <h2 class="text-2xl font-bold">📍 오시는 길</h2>
+        <div id="map" class="mt-4"></div>
+    </section>
+    
+    <!-- 연락처 및 계좌번호 -->
+    <section id="contact" class="bg-white" data-aos="fade-up">
+        <h2 class="text-2xl font-bold">📞 연락처 & 계좌번호</h2>
+        <p class="mt-2">신랑: 010-1234-5678</p>
+        <p>신부: 010-9876-5432</p>
+    </section>
+    
+    <!-- 하단 네비게이션 바 -->
+    <div class="bottom-nav">
+        <a href="#main">홈</a>
+        <a href="#gallery">사진첩</a>
+        <a href="#invitation">초대글</a>
+        <a href="#location">오시는 길</a>
+        <a href="#contact">연락처</a>
     </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
         AOS.init();
+
+        // 카카오 지도 API 로드
+        function initMap() {
+            var container = document.getElementById('map');
+            var options = {
+                center: new kakao.maps.LatLng(37.5665, 126.9780), // 서울 좌표
+                level: 3
+            };
+            var map = new kakao.maps.Map(container, options);
+        }
+        window.onload = initMap;
     </script>
 </body>
 </html>
