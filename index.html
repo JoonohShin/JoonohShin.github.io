@@ -3,60 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>수진 & 준호 모바일 청첩장</title>
+    <title>습도 계산기</title>
     <link rel="stylesheet" href="css/style.css">
-    <script defer src="js/script.js"></script>
-    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_API_KEY"></script> <!-- 카카오맵 API -->
 </head>
 <body>
+    <div class="container">
+        <h1>습도 계산기</h1>
 
-    <!-- 1. Main 정보 섹션 -->
-    <section id="main" class="section main-section">
-        <div class="overlay">
-            <h1>수진 & 준호</h1>
-            <p class="wedding-date">2025년 9월 7일 (토) 오후 2시</p>
-            <p class="wedding-place">서울 ○○호텔 3층 ○○홀</p>
-        </div>
-    </section>
+        <label>건구온도 (°C)</label>
+        <input type="number" id="dryBulb" placeholder="예: 25">
 
-    <!-- 2. 사진첩 섹션 -->
-    <section id="gallery" class="section">
-        <h2>우리의 추억</h2>
-        <div class="gallery-container">
-            <img src="images/photo1.jpg" alt="웨딩사진1">
-            <img src="images/photo2.jpg" alt="웨딩사진2">
-            <img src="images/photo3.jpg" alt="웨딩사진3">
-        </div>
-    </section>
+        <label>습구온도 (°C)</label>
+        <input type="number" id="wetBulb" placeholder="예: 20">
 
-    <!-- 3. 초대글 섹션 -->
-    <section id="invitation" class="section">
-        <h2>초대의 글</h2>
-        <p class="invitation-text">소중한 순간을 함께 해주세요. 따뜻한 축복과 사랑을 기다립니다.</p>
-    </section>
+        <button onclick="calculate()">계산하기</button>
 
-    <!-- 4. 오시는 길 (카카오맵 API) -->
-    <section id="directions" class="section">
-        <h2>오시는 길</h2>
-        <div id="map"></div>
-    </section>
+        <div id="result"></div>
+    </div>
 
-    <!-- 5. 연락처 & 계좌번호 -->
-    <section id="contact" class="section">
-        <h2>연락처 & 계좌번호</h2>
-        <p><strong>신랑:</strong> 010-1234-5678</p>
-        <p><strong>신부:</strong> 010-8765-4321</p>
-    </section>
-
-    <!-- 하단 고정 메뉴 -->
-    <nav class="bottom-nav">
-        <ul>
-            <li><a href="#main">홈</a></li>
-            <li><a href="#gallery">사진첩</a></li>
-            <li><a href="#directions">오시는 길</a></li>
-            <li><a href="#contact">연락처</a></li>
-        </ul>
-    </nav>
-
+    <script src="js/app.js"></script>
 </body>
 </html>
